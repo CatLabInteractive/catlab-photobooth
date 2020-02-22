@@ -55,6 +55,10 @@
                     <a href="https://github.com/catlabinteractive/catlab-photobooth">GitHub</a>.
                 </p>
 
+                <p>
+                    <a href="{{ action('PhotoboothController@index') }}" class="btn btn-primary">Launch photobooth</a>
+                </p>
+
             </div>
 
         </div>

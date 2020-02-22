@@ -42,6 +42,9 @@ export class SettingService {
                     this.nfcServer = settings.nfcServer || null;
                     this.nfcPassword = settings.nfcPassword || null;
 
+                    this.gphoto2Server = settings.gphoto2Server || null;
+                    this.gphoto2Password = settings.gphoto2Password || null;
+
                     resolve();
 
                 }.bind(this));
@@ -51,10 +54,12 @@ export class SettingService {
     }
 
     save() {
-        localForage.setItem('settings', {
+        return localForage.setItem('settings', {
             terminalName : this.terminalName,
             nfcServer: this.nfcServer,
-            nfcPassword: this.nfcPassword
+            nfcPassword: this.nfcPassword,
+            gphoto2Server: this.gphoto2Server,
+            gphoto2Password: this.gphoto2Password
         });
     }
 

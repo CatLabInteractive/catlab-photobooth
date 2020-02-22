@@ -33,27 +33,38 @@
             <b-form @submit="onSubmit" @reset="onReset">
 
                 <b-form-fieldset>
-                    <legend>General settings</legend>
+                    <legend>NFC trigger</legend>
 
                     <b-form-group
-                        id="terminal-name-group"
-                        label="Terminal name"
-                        label-for="terminal-name"
-                        description="Describing name of this specific terminal."
+                        id="gphoto2-server-group"
+                        label="gphoto2 webserver url"
+                        label-for="gphoto2-server"
                     >
                         <b-form-input
-                            id="terminal-name"
-                            v-model="name"
+                            id="gphoto2-server"
+                            v-model="gphoto2Server"
                             type="text"
-                            required
-                            placeholder="Terminal name"
+                            placeholder="gphoto2 webservice"
+                        ></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group
+                        id="gphoto2-password-group"
+                        label="gphoto2 webserver password"
+                        label-for="gphoto2-server"
+                    >
+                        <b-form-input
+                            id="gphoto2-password"
+                            v-model="gphoto2Password"
+                            type="text"
+                            placeholder="gphoto2 Server password"
                         ></b-form-input>
                     </b-form-group>
 
                 </b-form-fieldset>
 
                 <b-form-fieldset>
-                    <legend>Cashless system</legend>
+                    <legend>NFC trigger</legend>
 
                     <b-form-group
                         id="nfc-server-group"
@@ -120,7 +131,9 @@
                 loaded: false,
                 name: '',
                 nfcServer: '',
-                nfcPassword: ''
+                nfcPassword: '',
+                gphoto2Server: '',
+                gphoto2Password: ''
             }
         },
 
@@ -139,7 +152,15 @@
                 this.settingService.nfcServer = this.nfcServer;
                 this.settingService.nfcPassword = this.nfcPassword;
 
-                this.settingService.save();
+                this.settingService.gphoto2Server = this.gphoto2Server;
+                this.settingService.gphoto2Password = this.gphoto2Password;
+
+                this.settingService.save()
+                    .then(
+                        () => {
+                            window.location.reload();
+                        }
+                    );
 
             },
 
@@ -151,6 +172,9 @@
                 this.name = this.settingService.terminalName;
                 this.nfcServer = this.settingService.nfcServer;
                 this.nfcPassword = this.settingService.nfcPassword;
+
+                this.gphoto2Server = this.settingService.gphoto2Server;
+                this.gphoto2Password = this.settingService.gphoto2Password;
             }
 
         }
