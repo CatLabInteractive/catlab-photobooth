@@ -46,6 +46,11 @@ import App from './views/App'
 import Events from './views/Events'
 import Settings from "./views/Settings";
 import {OrganisationService} from "./services/OrganisationService";
+import {CameraService} from "./camera/CameraService";
+import {NfcReader} from "./nfccards/nfc/NfcReader";
+import {OfflineStore} from "./nfccards/store/OfflineStore";
+import {Logger} from "./nfccards/tools/Logger";
+import Photobooth from "./views/Photobooth";
 
 Vue.component(
     'logout-link',
@@ -82,6 +87,12 @@ const router = new VueRouter({
         },
 
         {
+            path: '/events/:id/photobooth',
+            name: 'photobooth',
+            component: Photobooth,
+        },
+
+        {
             path: '/settings',
             name: 'settings',
             component: Settings
@@ -104,22 +115,28 @@ Vue.prototype.$settingService.load()
     .then(
         function() {
 
+            let offlineStore = new OfflineStore(window.ORGANISATION_ID);
+            Vue.prototype.$nfcService = new NfcReader(offlineStore, new Logger());
 
             // Only try to connect to the nfc reader if config variables are set.
-            if (
-                Vue.prototype.$settingService.nfcServer
-            ) {
-                Vue.prototype.$cardService.connect(
+            if (Vue.prototype.$settingService.nfcServer) {
+                Vue.prototype.$nfcService.connect(
                     Vue.prototype.$settingService.nfcServer,
                     Vue.prototype.$settingService.nfcPassword
                 );
+            }
 
-                Vue.prototype.$organisationService.get(ORGANISATION_ID, { fields: '*,secret'})
-                    .then(
-                        (organisation) => {
-                            Vue.prototype.$cardService.setPassword(organisation.secret);
-                        }
-                    );
+            Vue.prototype.$cameraService = new CameraService(
+                window.axios.create({
+                    baseURL: '/api/v1',
+                    json: true
+                }),
+            );
+            if (Vue.prototype.$settingService.gphoto2Server) {
+                Vue.prototype.$cameraService.connect(
+                    Vue.prototype.$settingService.gphoto2Server,
+                    Vue.prototype.$settingService.gphoto2Password
+                );
             }
 
             // and now boot the app

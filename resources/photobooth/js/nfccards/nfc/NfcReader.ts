@@ -80,10 +80,12 @@ export class NfcReader extends Eventable {
             if (this.executeHandshake) {
 
                 const password = this.calculateCardPassword(data.uid);
-                this.socket.emit('nfc:password', {
-                    uid: data.uid,
-                    password: password
-                });
+                if (password) {
+                    this.socket.emit('nfc:password', {
+                        uid: data.uid,
+                        password: password
+                    });
+                }
 
                 this.currentCard = card;
 
@@ -322,6 +324,10 @@ export class NfcReader extends Eventable {
      * @param uid
      */
     private calculateCardPassword(uid: string) {
+        if (!this.password) {
+            return null;
+        }
+
         const password = CryptoJS.SHA256(uid + this.password);
         return password.toString(CryptoJS.enc.Hex).substr(0, 8);
     }

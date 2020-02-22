@@ -31,6 +31,8 @@ import {Eventable} from "../utils/Eventable";
  */
 export class Camera extends Eventable {
 
+    private url: string = '';
+
     private socket: any;
 
     private password: string = '';
@@ -48,6 +50,9 @@ export class Camera extends Eventable {
     }
 
     connect(url: string, password: string, handleHandshake = true) {
+
+        this.url = url;
+
         this.socket = io(url);
         this.executeHandshake = handleHandshake;
 
@@ -70,7 +75,7 @@ export class Camera extends Eventable {
     private async handshake()
     {
         this.socket.emit('hello', { password: this.nfcReaderPassword }, (response: any) => {
-            console.log('Response from nfc reader hello: ', response);
+            console.log('Response from camera service hello: ', response);
             if (response.success) {
                 this.trigger('connection:change', true);
             }
@@ -92,9 +97,17 @@ export class Camera extends Eventable {
     public takePicture(name: string) {
         return new Promise(
             (resolve, reject) => {
-                this.socket.emit('photo:takePicture', function(data) {
-                    resolve(data);
-                });
+                this.socket.emit(
+                    'photo:takePicture',
+                    {
+                        name: name
+                    },
+                    (data: any) => {
+                        resolve({
+                            url: this.url + data.file
+                        });
+                    }
+                );
             }
         );
     }
