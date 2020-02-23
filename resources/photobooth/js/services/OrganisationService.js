@@ -1,6 +1,6 @@
-/*
+/**
  * CatLab Photobooth - Online photobooth
- * Copyright (C) 2019 Thijs Van der Schaeghe
+ * Copyright (C) 2020 Thijs Van der Schaeghe
  * CatLab Interactive bvba, Gent, Belgium
  * http://www.catlab.eu/
  *

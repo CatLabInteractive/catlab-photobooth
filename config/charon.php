@@ -2,7 +2,7 @@
 
 return [
 
-    'title' => 'CatLab Drinks',
+    'title' => 'CatLab Photobooth',
     'description' => 'Simple cash register app with support for NFC topup cards.',
     'contact' => [
         'name' => 'CatLab Interactive',

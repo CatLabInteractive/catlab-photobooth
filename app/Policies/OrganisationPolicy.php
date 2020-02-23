@@ -1,7 +1,7 @@
 <?php
 /**
- * CatLab Drinks - Simple bar automation system
- * Copyright (C) 2019 Thijs Van der Schaeghe
+ * CatLab Photobooth - Online photobooth
+ * Copyright (C) 2020 Thijs Van der Schaeghe
  * CatLab Interactive bvba, Gent, Belgium
  * http://www.catlab.eu/
  *
