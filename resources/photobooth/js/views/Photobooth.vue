@@ -182,19 +182,19 @@
 
                 this.image1 = await this.takePictureCommand('Groepsfoto!', 'Smile!', name + ' normaal');
                 this.fullscreenImage = this.image1;
-                await this.wait(2);
+                await this.wait(5);
 
                 this.image2 = await this.takePictureCommand('En nu met gekke bekken!', 'Gekke bek!', name + ' gek');
                 this.fullscreenImage = this.image2;
-                await this.wait(2);
+                await this.wait(5);
 
                 this.image3 = await this.takePictureCommand('En nu kei serieus', 'Serieuzer!', name + ' serieus');
                 this.fullscreenImage = this.image3;
-                await this.wait(2);
+                await this.wait(5);
 
                 this.image4 = await this.takePictureCommand('Avada Kedavra!', 'Speel dood', name + ' dood');
                 this.fullscreenImage = this.image4;
-                await this.wait(2);
+                await this.wait(5);
 
                 this.message = null;
                 this.fullscreenImage = null;

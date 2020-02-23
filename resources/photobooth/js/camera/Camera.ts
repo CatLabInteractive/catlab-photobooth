@@ -100,7 +100,8 @@ export class Camera extends Eventable {
                 this.socket.emit(
                     'photo:takePicture',
                     {
-                        name: name
+                        name: name,
+                        keep: true
                     },
                     (data: any) => {
                         if (typeof(data.file) !== 'undefined') {
