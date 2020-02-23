@@ -103,9 +103,10 @@ export class Camera extends Eventable {
                         name: name
                     },
                     (data: any) => {
-                        resolve({
-                            url: this.url + data.file
-                        });
+                        if (typeof(data.file) !== 'undefined') {
+                            data.url = this.url + data.file;
+                        }
+                        resolve(data);
                     }
                 );
             }

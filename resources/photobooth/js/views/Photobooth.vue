@@ -21,37 +21,42 @@
 
 <template>
 
-    <b-container fluid>
 
-        <div style="width: 58vw; height: 40vw; background: black; padding: 1vw; margin: auto; box-sizing: border-box;">
-            <div class="row">
-                <div class="col-md-6">
-                    <img class="img-fluid" :src="image1" v-if="image1" />
-                </div>
+    <div class="photobooth-compilation-container">
+        <div class="photobooth-compilation">
 
-                <div class="col-md-6">
-                    <img class="img-fluid" :src="image2" v-if="image2" />
+            <div class="fullscreenImage" v-if="fullscreenImage">
+                <img :src="fullscreenImage" />
+            </div>
+
+            <div class="message" v-if="message">
+                <div>
+                    <p v-html="message"></p>
                 </div>
             </div>
 
-            <br />
+            <div class="photobooth-compilation-content">
 
-            <div class="row">
-                <div class="col-md-6">
-                    <img class="img-fluid" :src="image3" v-if="image3" />
+                <div class="image">
+                    <img :src="image1" v-if="image1" />
                 </div>
 
-                <div class="col-md-6">
-                    <img class="img-fluid" :src="image4" v-if="image4" />
+                <div class="image">
+                    <img :src="image2" v-if="image2" />
                 </div>
+
+                <div class="image">
+                    <img :src="image3" v-if="image3" />
+                </div>
+
+                <div class="image">
+                    <img :src="image4" v-if="image4" />
+                </div>
+
+
             </div>
         </div>
-
-        <div>
-            <p>{{ message }}</p>
-        </div>
-
-    </b-container>
+    </div>
 
 </template>
 
@@ -60,16 +65,34 @@
     import {EventService} from "../services/EventService";
 
     export default {
-        mounted() {
+        async mounted() {
 
-            this.message = 'Scan drankkaart om te beginnen...';
+            this.message = 'Scan drankkaart';
             this.eventId = this.$route.params.id;
 
-            this.$nfcService.on('card:connect', (data) => {
+            this.isTakingPictures = false;
+
+            this.$nfcService.on('card:connect', async (data) => {
+
+                if (this.isTakingPictures) {
+                    return;
+                }
+
+                this.isTakingPictures = true;
+
                 var uid = data.uid;
-                this.takePicture(uid);
+                await this.takePictures(uid);
             });
 
+            document.body.className = 'fullscreen';
+
+            // and take our first picture.
+            this.fullscreenImage = await this.takePicture('bootup');
+        },
+
+        beforeDestroy() {
+            document.body.className = '';
+            this.$nfcService.off('card:connect');
         },
 
         watch: {
@@ -82,6 +105,7 @@
 
         data() {
             return {
+                fullscreenImage: null,
                 image1: null,
                 image2: null,
                 image3: null,
@@ -96,35 +120,89 @@
             wait: async function(duration) {
                 return new Promise(
                     (resolve) => {
-                        setTimeout(resolve, duration);
+                        setTimeout(resolve, duration * 1000);
                     }
                 );
             },
 
-            takePicture: async function(name) {
+            countdown: async function(message) {
 
-                this.message = 'Taking picture...';
+                this.message = message + '<br />6';
+                await this.wait(1);
+
+                this.message = message + '<br />5';
+                await this.wait(1);
+
+                this.message = message + '<br />4';
+                await this.wait(1);
+
+                this.message = message + '<br />3';
+                await this.wait(1);
+
+                this.message = message + '<br />2';
+                await this.wait(1);
+
+                this.message = message + '<br />1';
+                await this.wait(1);
+            },
+
+            takePictureCommand: async function(commandText, actionText, filename) {
+                await this.countdown(commandText);
+
+                this.message = actionText;
+
+                let result = await this.takePicture(filename);
+                this.message = '';
+
+                return result;
+            },
+
+            takePicture: async function(name) {
+                let result = await this.$cameraService.takePicture(name);
+
+                console.log(result);
+
+                if (!result.url) {
+                    this.message = 'Error: ' + result.error;
+                    await this.wait(3);
+
+                    return '';
+                }
+                return result.url;
+            },
+
+            takePictures: async function(name) {
+
 
                 this.image1 = null;
                 this.image2 = null;
                 this.image3 = null;
                 this.image4 = null;
+                this.fullscreenImage = null;
 
-                console.log(this);
+                this.image1 = await this.takePictureCommand('Groepsfoto!', 'Smile!', name + ' normaal');
+                this.fullscreenImage = this.image1;
+                await this.wait(2);
 
-                this.wait(1);
-                this.image1 = (await this.$cameraService.takePicture(name)).url;
+                this.image2 = await this.takePictureCommand('En nu met gekke bekken!', 'Gekke bek!', name + ' gek');
+                this.fullscreenImage = this.image2;
+                await this.wait(2);
 
-                this.wait(1);
-                this.image2 = (await this.$cameraService.takePicture(name)).url;
+                this.image3 = await this.takePictureCommand('En nu kei serieus', 'Serieuzer!', name + ' serieus');
+                this.fullscreenImage = this.image3;
+                await this.wait(2);
 
-                this.wait(1);
-                this.image3 = (await this.$cameraService.takePicture(name)).url;
+                this.image4 = await this.takePictureCommand('Avada Kedavra!', 'Speel dood', name + ' dood');
+                this.fullscreenImage = this.image4;
+                await this.wait(2);
 
-                this.wait(1);
-                this.image4 = (await this.$cameraService.takePicture(name)).url;
+                this.message = null;
+                this.fullscreenImage = null;
 
-                this.message = 'Done!';
+                this.isTakingPictures = false;
+
+                await this.wait(15);
+                this.message = 'Scan drankkaart';
 
             }
 

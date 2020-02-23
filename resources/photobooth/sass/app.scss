@@ -13,125 +13,86 @@
 // Font awesome
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.photobooth-compilation-container {
+    background: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
 }
 
-.live-orders .product {
-  width: 150px;
-  border: 2px solid orange;
-  background: #ffefa9;
-  border-radius: 10px;
-  padding: 10px;
-  float: left;
-  margin: 5px 5px 0 0;
-  height: 100px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
+body.fullscreen {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: black;
 }
 
-.live-orders .product .amount {
-  font-size: 140%;
-}
+.photobooth-compilation {
 
-.live-orders .product .buttons {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  display: block;
-}
+    width: 100vw;
+    height: 50vw; /* height:width ratio = 9/16 = .5625  */
+    max-height: 100vh;
+    max-width: 150vh; /* 16/9 = 1.778 */
+    margin: 0 auto;
+    position: fixed;
+    top:0;bottom:0; /* vertical center */
+    left:0;right:0; /* horizontal center */
+    z-index: 10;
 
-.live-orders .product .amount {
-  position: absolute;
-  left: 10px;
-  bottom: 5px;
-  display: block;
-}
+    background: black;
 
-.remote-orders .order {
-  border: 2px solid gray;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
+    .fullscreenImage {
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
 
-#live-orders .total,
-.payment-modal .total {
-  border: 2px solid green;
-  background: #bcffc8;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 150%;
-  margin: 20px 0;
-}
+    .message {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 100px;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
 
-#live-orders .total p,
-.payment-modal .total p {
-  margin: 0;
-  padding: 0;
-}
+        div {
+            display: table;
 
-.payment-modal p {
-    font-size: 150%;
-}
+            margin: 30vh auto;
+            height: 40vh;
+            width: 80%;
+            background: rgba(0, 0, 0, 0.8);
+        }
 
-.order-confirm-modal li {
-  font-size: 150%;
-}
+        div p {
+            color: white;
+            text-align: center;
 
-.order-history .order {
-  float: left;
-  width: 24%;
-  margin: 4px;
-  border: 2px solid gray;
-  padding: 10px;
-  box-sizing: border-box;
-}
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
 
-.order-history .order:nth-child(4n+1) {
-  clear:both;
-}
+    .photobooth-compilation-content {
 
-.order.status.processed {
-  background: #bcffc8;
-  border-color: green;
-}
+        .image {
+            max-width: 50%;
+            max-height: 50%;
+            float: left;
+        }
 
-.order.status.declined {
-  background: #ffc5c5;
-  border-color: red;
-}
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            box-sizing: border-box;
+            border: 10px solid black;
+        }
 
-.order-confirm-modal i.huge {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 100px;
-}
+    }
 
-.topup-amounts .amount {
-    width: 150px;
-    border: 2px solid orange;
-    background: #ffefa9;
-    border-radius: 10px;
-    padding: 10px;
-    float: left;
-    margin: 5px 5px 0 0;
-    height: 100px;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
-}
-
-.topup-amounts .amount {
-    font-size: 140%;
 }
