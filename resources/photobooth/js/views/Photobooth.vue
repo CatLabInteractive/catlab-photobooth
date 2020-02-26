@@ -69,7 +69,6 @@
 
                 var uid = data.uid;
                 await this.takePictures(uid);
-                this.isTakingPictures = false;
             });
 
             document.body.className = 'fullscreen';
@@ -160,13 +159,15 @@
                     this.images.pop();
                 }
 
+                this.isTakingPictures = false;
                 await this.wait(5);
-                this.message = 'Scan drankkaart';
-                this.fullscreenImage = null;
-                this.showImages = true;
 
+                if (!this.isTakingPictures) {
+                    this.message = 'Scan drankkaart';
+                    this.fullscreenImage = null;
+                    this.showImages = true;
+                }
             }
-
         }
     }
 </script>
