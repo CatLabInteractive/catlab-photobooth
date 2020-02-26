@@ -35,24 +35,11 @@
                 </div>
             </div>
 
-            <div class="photobooth-compilation-content">
+            <div class="photobooth-compilation-content" v-if="showImages">
 
-                <div class="image">
-                    <img :src="image1" v-if="image1" />
+                <div class="image" v-for="(item, index) in images">
+                    <img :src="item" />
                 </div>
-
-                <div class="image">
-                    <img :src="image2" v-if="image2" />
-                </div>
-
-                <div class="image">
-                    <img :src="image3" v-if="image3" />
-                </div>
-
-                <div class="image">
-                    <img :src="image4" v-if="image4" />
-                </div>
-
 
             </div>
         </div>
@@ -82,6 +69,7 @@
 
                 var uid = data.uid;
                 await this.takePictures(uid);
+                this.isTakingPictures = false;
             });
 
             document.body.className = 'fullscreen';
@@ -106,10 +94,8 @@
         data() {
             return {
                 fullscreenImage: null,
-                image1: null,
-                image2: null,
-                image3: null,
-                image4: null,
+                images: [],
+                showImages: true,
                 eventId: null,
                 message: 'Please wait...'
             }
@@ -126,15 +112,6 @@
             },
 
             countdown: async function(message) {
-
-                this.message = message + '<br />6';
-                await this.wait(1);
-
-                this.message = message + '<br />5';
-                await this.wait(1);
-
-                this.message = message + '<br />4';
-                await this.wait(1);
 
                 this.message = message + '<br />3';
                 await this.wait(1);
@@ -173,36 +150,20 @@
 
             takePictures: async function(name) {
 
-
-                this.image1 = null;
-                this.image2 = null;
-                this.image3 = null;
-                this.image4 = null;
+                this.showImages = false;
                 this.fullscreenImage = null;
 
-                this.image1 = await this.takePictureCommand('Groepsfoto!', 'Smile!', name + ' normaal');
-                this.fullscreenImage = this.image1;
+                this.fullscreenImage = await this.takePictureCommand('Foto!', 'Cheese!', name);
+                this.images.unshift(this.fullscreenImage);
+
+                while (this.images.length > 4) {
+                    this.images.pop();
+                }
+
                 await this.wait(5);
-
-                this.image2 = await this.takePictureCommand('En nu met gekke bekken!', 'Gekke bek!', name + ' gek');
-                this.fullscreenImage = this.image2;
-                await this.wait(5);
-
-                this.image3 = await this.takePictureCommand('En nu kei serieus', 'Serieuzer!', name + ' serieus');
-                this.fullscreenImage = this.image3;
-                await this.wait(5);
-
-                this.image4 = await this.takePictureCommand('Avada Kedavra!', 'Speel dood', name + ' dood');
-                this.fullscreenImage = this.image4;
-                await this.wait(5);
-
-                this.message = null;
-                this.fullscreenImage = null;
-
-                this.isTakingPictures = false;
-
-                await this.wait(15);
                 this.message = 'Scan drankkaart';
+                this.fullscreenImage = null;
+                this.showImages = true;
 
             }
 
