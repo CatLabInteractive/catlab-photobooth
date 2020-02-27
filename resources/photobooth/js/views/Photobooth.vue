@@ -112,6 +112,15 @@
 
             countdown: async function(message) {
 
+                this.message = message + '<br />Ready?';
+                await this.wait(1);
+
+                this.message = message + '<br />5';
+                await this.wait(1);
+
+                this.message = message + '<br />4';
+                await this.wait(1);
+
                 this.message = message + '<br />3';
                 await this.wait(1);
 
