@@ -3,7 +3,10 @@
 
 namespace App\Models;
 
+use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
 
 /**
  *
@@ -27,5 +30,23 @@ class Subject extends Model
         }
 
         return $subject;
+    }
+
+    public function updateSubjectName()
+    {
+        if (!config('services.subjectNameResolver')) {
+            return;
+        }
+
+        $resolveUrl = str_replace('{subjectId}', $this->identifier, config('services.subjectNameResolver.url'));
+
+        $client = new Client();
+
+        $data = $client->get($resolveUrl);
+        $data = json_decode($data->getBody()->getContents(), true);
+        if ($data && isset($data['name'])) {
+            $this->name = $data['name'];
+            $this->save();
+        }
     }
 }
