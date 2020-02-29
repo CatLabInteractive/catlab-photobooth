@@ -55,10 +55,12 @@ export class UploadService extends AbstractService {
                         this.create({
                             base64: imageData,
                             name: originalName,
+                            originalUrl: originalImageUrl,
                             'content-type': 'image/jpg',
                             subjectIdentifier: subjectIdentifier
                         }).then((data) => {
                             console.log(data);
+                            resolve(data);
                         });
                     }
                 )

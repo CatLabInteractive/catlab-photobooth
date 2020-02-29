@@ -59,13 +59,26 @@ class UploadController extends Base\ResourceController
 
         $file = $this->getUploadedFile($request);
         if ($file) {
-            /** @var \App\Models\Asset $asset */
-            $asset = \CentralStorage::store($file);
-            $asset->save();
 
             $content = $request->json();
             if ($content) {
                 $subjectId = $content->get('subjectIdentifier');
+                $originalUrl = $content->get('originalUrl');
+                if ($originalUrl) {
+                    // check if we have already uploaded this.
+                    $existingAsset = Asset::where('original_url', '=', $originalUrl)->first();
+                    if ($existingAsset) {
+                        $context = $this->getContext(Action::VIEW);
+                        $resource = $this->toResource($existingAsset, $context);
+                        return $this->toResponse($resource);
+                    }
+                }
+
+                /** @var \App\Models\Asset $asset */
+                $asset = \CentralStorage::store($file);
+                $asset->original_url = $originalUrl;
+                $asset->save();
+
                 if ($subjectId) {
                     $subject = Subject::getFromIdentifier($subjectId);
                     if ($subject) {

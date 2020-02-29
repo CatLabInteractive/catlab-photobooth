@@ -51,8 +51,6 @@
 
             this.uploadService = new UploadService();
 
-            this.uploadExistingPhotos();
-
         },
 
         beforeDestroy() {
@@ -69,7 +67,7 @@
 
         data() {
             return {
-                currentImage: 10,
+                currentImage: 0,
                 images: []
             }
         },
@@ -86,19 +84,23 @@
                 });
 
                 this.images = result;
-                console.log(result);
-
                 this.uploadNext();
             },
 
             uploadNext: async function() {
 
+                if (this.currentImage >= this.images.length) {
+                    return;
+                }
+
                 let image = this.images[this.currentImage];
                 image.status = 'uploading';
 
-                this.uploadService.uploadImage(image.url, image.name, image.name);
+                await this.uploadService.uploadImage(image.url, image.name, image.name);
+                image.status = 'uploaded';
 
                 this.currentImage ++;
+                this.uploadNext();
 
             }
         }
