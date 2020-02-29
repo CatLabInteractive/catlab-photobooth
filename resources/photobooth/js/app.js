@@ -51,6 +51,7 @@ import {NfcReader} from "./nfccards/nfc/NfcReader";
 import {OfflineStore} from "./nfccards/store/OfflineStore";
 import {Logger} from "./nfccards/tools/Logger";
 import Photobooth from "./views/Photobooth";
+import SyncExistingPhotos from "./views/SyncExistingPhotos";
 
 Vue.component(
     'logout-link',
@@ -90,6 +91,12 @@ const router = new VueRouter({
             path: '/events/:id/photobooth',
             name: 'photobooth',
             component: Photobooth,
+        },
+
+        {
+            path: '/events/:id/sync',
+            name: 'sync',
+            component: SyncExistingPhotos,
         },
 
         {

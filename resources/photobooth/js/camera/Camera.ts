@@ -115,6 +115,25 @@ export class Camera extends Eventable {
     }
 
     /**
+     * Take a picture.
+     * @param name
+     */
+    public listPictures() {
+        return new Promise(
+            (resolve, reject) => {
+                this.socket.emit('photo:list', {}, (data: any) => {
+                    resolve(data.files.map((item: any) => {
+                        if (item.file) {
+                            item.url = this.url + item.file;
+                        }
+                        return item;
+                    }));
+                });
+            }
+        );
+    }
+
+    /**
      *
      */
     private reconnect() {

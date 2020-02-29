@@ -1,5 +1,7 @@
 <?php
 
+use CatLab\CentralStorage\Client\CentralStorageServiceProvider;
+
 return [
 
     /*
@@ -180,6 +182,7 @@ return [
         SocialiteProviders\Manager\ServiceProvider::class,
 
         Kouz\LaravelAirbrake\ServiceProvider::class,
+        CentralStorageServiceProvider::class,
 
 
     ],
@@ -230,6 +233,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'CentralStorage' => CatLab\CentralStorage\Client\CentralStorageClientFacade::class,
 
     ],
 

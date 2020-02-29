@@ -69,7 +69,12 @@ class UserController extends Base\ResourceController
     /**
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
+     * @throws \CatLab\Charon\Exceptions\InvalidContextAction
      * @throws \CatLab\Charon\Exceptions\InvalidEntityException
+     * @throws \CatLab\Charon\Exceptions\InvalidPropertyException
+     * @throws \CatLab\Charon\Exceptions\InvalidTransformer
+     * @throws \CatLab\Charon\Exceptions\IterableExpected
+     * @throws \CatLab\Charon\Exceptions\VariableNotFoundInContext
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($id)
@@ -86,7 +91,12 @@ class UserController extends Base\ResourceController
     /**
      * @TODO This method only exists as an example. You do NOT want this in your production app.
      * @return \Illuminate\Http\JsonResponse
+     * @throws \CatLab\Charon\Exceptions\InvalidContextAction
      * @throws \CatLab\Charon\Exceptions\InvalidEntityException
+     * @throws \CatLab\Charon\Exceptions\InvalidPropertyException
+     * @throws \CatLab\Charon\Exceptions\InvalidTransformer
+     * @throws \CatLab\Charon\Exceptions\IterableExpected
+     * @throws \CatLab\Charon\Exceptions\VariableNotFoundInContext
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()

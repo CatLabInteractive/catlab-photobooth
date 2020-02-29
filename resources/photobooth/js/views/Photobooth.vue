@@ -135,9 +135,6 @@
 
             takePicture: async function(name) {
                 let result = await this.$cameraService.takePicture(name);
-
-                console.log(result);
-
                 if (!result.url) {
                     this.message = 'Error: ' + result.error;
                     await this.wait(3);

@@ -22,6 +22,7 @@
 
 namespace App\Providers;
 
+use CatLab\CentralStorage\Client\Models\Asset;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -36,6 +37,7 @@ class AuthServiceProvider extends ServiceProvider
         \App\Models\User::class => \App\Policies\UserPolicy::class,
         \App\Models\Event::class => \App\Policies\EventPolicy::class,
         \App\Models\Organisation::class => \App\Policies\OrganisationPolicy::class,
+        Asset::class => \App\Policies\AssetPolicy::class
     ];
 
     /**

@@ -57,4 +57,8 @@ export class CameraService extends Eventable {
         return this.camera.takePicture(name);
     }
 
+    public listPictures() {
+        return this.camera.listPictures();
+    }
+
 }

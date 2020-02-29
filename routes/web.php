@@ -32,3 +32,4 @@ if (config('services.catlab.client_id')) {
 }
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/assets/upload', 'HomeController@index')->name('home');
