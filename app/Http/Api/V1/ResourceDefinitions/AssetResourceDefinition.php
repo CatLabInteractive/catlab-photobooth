@@ -18,6 +18,7 @@ class AssetResourceDefinition extends ResourceDefinition
 
         $this->identifier('id');
 
-
+        $this->field('url')
+            ->visible(true);
     }
 }

@@ -85,7 +85,6 @@ class EventController extends Base\ResourceController
         return Organisation::findOrFail($organisationId);
     }
 
-
     /**
      * @return string
      */

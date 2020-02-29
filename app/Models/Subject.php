@@ -49,4 +49,12 @@ class Subject extends Model
             $this->save();
         }
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function assets()
+    {
+        return $this->hasMany(Asset::class);
+    }
 }

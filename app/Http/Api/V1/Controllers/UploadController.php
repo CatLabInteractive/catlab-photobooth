@@ -52,6 +52,7 @@ class UploadController extends Base\ResourceController
      * @throws \CatLab\Charon\Exceptions\IterableExpected
      * @throws \CatLab\Charon\Exceptions\VariableNotFoundInContext
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \CatLab\Charon\Exceptions\InvalidResourceDefinition
      */
     public function upload(Request $request)
     {
@@ -60,6 +61,7 @@ class UploadController extends Base\ResourceController
         $file = $this->getUploadedFile($request);
         if ($file) {
 
+            // remove file
             $content = $request->json();
             if ($content) {
                 $subjectId = $content->get('subjectIdentifier');
@@ -68,6 +70,9 @@ class UploadController extends Base\ResourceController
                     // check if we have already uploaded this.
                     $existingAsset = Asset::where('original_url', '=', $originalUrl)->first();
                     if ($existingAsset) {
+
+                        unlink($file->getRealPath());
+
                         $context = $this->getContext(Action::VIEW);
                         $resource = $this->toResource($existingAsset, $context);
                         return $this->toResponse($resource);
@@ -79,6 +84,8 @@ class UploadController extends Base\ResourceController
                 $asset->original_url = $originalUrl;
                 $asset->save();
 
+                unlink($file->getRealPath());
+
                 if ($subjectId) {
                     $subject = Subject::getFromIdentifier($subjectId);
                     if ($subject) {
@@ -86,6 +93,8 @@ class UploadController extends Base\ResourceController
                         $asset->save();
                     }
                 }
+            } else {
+                unlink($file->getRealPath());
             }
 
             $context = $this->getContext(Action::VIEW);

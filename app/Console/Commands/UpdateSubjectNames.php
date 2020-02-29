@@ -41,6 +41,7 @@ class UpdateSubjectNames extends Command
         foreach (Subject::all() as $subject) {
             $subject->updateSubjectName();
             $this->output->writeln('Set name for subject ' . $subject->id . ' to ' . $subject->name);
+            sleep(1);
         }
     }
 }

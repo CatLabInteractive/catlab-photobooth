@@ -56,6 +56,7 @@ $routes->group(
 
         // Swagger documentation
         $routes->get('description', 'DescriptionController@description')->tag('description');
+        \App\Http\Api\V1\Controllers\PhotosController::setRoutes($routes);
 
         // Controllers: oauth middleware is required
         $routes->group(
