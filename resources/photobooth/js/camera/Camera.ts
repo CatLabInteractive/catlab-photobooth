@@ -134,6 +134,26 @@ export class Camera extends Eventable {
     }
 
     /**
+     * Take a picture.
+     * @param name
+     */
+    public removePicture(name: string) {
+        return new Promise(
+            (resolve, reject) => {
+                this.socket.emit('photo:remove', {
+                    file: name
+                }, (data: any) => {
+                    if (typeof(data.error) === 'undefined') {
+                        resolve(true);
+                    } else {
+                        reject(data.error);
+                    }
+                });
+            }
+        );
+    }
+
+    /**
      *
      */
     private reconnect() {

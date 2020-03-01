@@ -61,4 +61,8 @@ export class CameraService extends Eventable {
         return this.camera.listPictures();
     }
 
+    public removePicture(name: string) {
+        return this.camera.removePicture(name);
+    }
+
 }

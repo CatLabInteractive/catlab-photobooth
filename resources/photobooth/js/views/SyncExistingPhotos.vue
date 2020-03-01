@@ -99,6 +99,8 @@
                 await this.uploadService.uploadImage(image.url, image.name, image.name);
                 image.status = 'uploaded';
 
+                await this.$cameraService.removePicture(image.file);
+
                 this.currentImage ++;
                 this.uploadNext();
 
