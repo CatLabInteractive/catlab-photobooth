@@ -43,13 +43,8 @@
 
 <script>
 
-    import {EventService} from "../services/EventService";
-    import {UploadService} from "../services/UploadService";
-
     export default {
         async mounted() {
-
-            this.uploadService = new UploadService();
 
         },
 
@@ -96,7 +91,7 @@
                 let image = this.images[this.currentImage];
                 image.status = 'uploading';
 
-                await this.uploadService.uploadImage(image.url, image.name, image.name);
+                await this.$uploadService.uploadImage(image.url, image.name, image.name);
                 image.status = 'uploaded';
 
                 await this.$cameraService.removePicture(image.file);

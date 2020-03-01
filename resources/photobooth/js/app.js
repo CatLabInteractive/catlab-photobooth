@@ -52,6 +52,7 @@ import {OfflineStore} from "./nfccards/store/OfflineStore";
 import {Logger} from "./nfccards/tools/Logger";
 import Photobooth from "./views/Photobooth";
 import SyncExistingPhotos from "./views/SyncExistingPhotos";
+import {UploadService} from "./services/UploadService";
 
 Vue.component(
     'logout-link',
@@ -121,6 +122,8 @@ Vue.prototype.$organisationService = new OrganisationService();
 Vue.prototype.$settingService.load()
     .then(
         function() {
+
+            Vue.prototype.$uploadService = new UploadService();
 
             let offlineStore = new OfflineStore(window.ORGANISATION_ID);
             Vue.prototype.$nfcService = new NfcReader(offlineStore, new Logger());

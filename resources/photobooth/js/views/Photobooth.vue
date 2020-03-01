@@ -150,6 +150,13 @@
 
                     return '';
                 }
+
+                // try to upload the picture & remove it from the service, but don't wait for that.
+                this.$uploadService.uploadImage(result.url, result.name, result.name)
+                    .then(() => {
+                        this.$cameraService.removePicture(result.file);
+                    });
+
                 return result.url;
             },
 
