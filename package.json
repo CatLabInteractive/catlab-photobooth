@@ -13,7 +13,7 @@
         "@fortawesome/fontawesome-free": "^5.12.1",
         "@types/crypto-js": "^3.1.43",
         "@types/socket.io-client": "^1.4.32",
-        "axios": "^0.19.2",
+        "axios": "^0.21.2",
         "bootstrap": "^4.4.1",
         "bootstrap-vue": "^2.5.0",
         "cross-env": "^5.2.1",
