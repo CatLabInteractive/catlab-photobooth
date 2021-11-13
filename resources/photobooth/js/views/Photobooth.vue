@@ -74,7 +74,7 @@
             document.body.className = 'fullscreen';
 
             // and take our first picture.
-            this.fullscreenImage = await this.takePicture('bootup');
+            //this.fullscreenImage = await this.takePicture('bootup');
         },
 
         beforeDestroy() {
@@ -152,12 +152,10 @@
                 }
 
                 // try to upload the picture & remove it from the service, but don't wait for that.
-                this.$uploadService.uploadImage(result.url, result.name, result.name)
-                    .then(() => {
-                        this.$cameraService.removePicture(result.file);
-                    });
+                let uploaded = await this.$uploadService.uploadImage(result.url, result.name, result.name);
 
-                return result.url;
+                this.$cameraService.removePicture(result.file);
+                return uploaded.url;
             },
 
             takePictures: async function(name) {
@@ -165,7 +163,7 @@
                 this.showImages = false;
                 this.fullscreenImage = null;
 
-                this.fullscreenImage = await this.takePictureCommand('Foto!', 'Cheese!', name);
+                this.fullscreenImage = await this.takePictureCommand('😁', 'Cheese!', name);
                 this.images.unshift(this.fullscreenImage);
 
                 while (this.images.length > 4) {

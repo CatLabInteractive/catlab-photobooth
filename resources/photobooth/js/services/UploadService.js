@@ -37,7 +37,7 @@ export class UploadService extends AbstractService {
      * @param subjectIdentifier
      * @returns {Promise<unknown>}
      */
-    uploadImage(originalImageUrl, originalName, subjectIdentifier) {
+    async uploadImage(originalImageUrl, originalName, subjectIdentifier) {
 
         return new Promise(
             (resolve, reject) => {
@@ -52,13 +52,15 @@ export class UploadService extends AbstractService {
                         var prefix = "data:" + response.headers["content-type"] + ";base64,";
                         let imageData = prefix + Buffer.from(response.data, 'binary').toString('base64');
 
-                        this.create({
+                        let contentData = {
                             base64: imageData,
                             name: originalName,
                             originalUrl: originalImageUrl,
                             'content-type': 'image/jpg',
                             subjectIdentifier: subjectIdentifier
-                        }).then((data) => {
+                        }
+
+                        this.create(contentData).then((data) => {
                             console.log(data);
                             resolve(data);
                         });
