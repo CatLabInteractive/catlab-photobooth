@@ -33,7 +33,7 @@
             <b-form @submit="onSubmit" @reset="onReset">
 
                 <b-form-fieldset>
-                    <legend>NFC trigger</legend>
+                    <legend>Gphoto2 server</legend>
 
                     <b-form-group
                         id="gphoto2-server-group"
@@ -64,7 +64,7 @@
                 </b-form-fieldset>
 
                 <b-form-fieldset>
-                    <legend>NFC trigger</legend>
+                    <legend>NFC server</legend>
 
                     <b-form-group
                         id="nfc-server-group"
