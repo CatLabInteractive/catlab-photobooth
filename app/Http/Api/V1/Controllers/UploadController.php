@@ -92,6 +92,8 @@ class UploadController extends Base\ResourceController
                         $asset->subject()->associate($subject);
                         $asset->save();
                     }
+
+                    $this->sendEuklesEvent($subject, $asset);
                 }
             } else {
                 unlink($file->getRealPath());
@@ -104,6 +106,28 @@ class UploadController extends Base\ResourceController
         }
 
         return $this->getErrorMessage('No valid file provided.');
+    }
+
+    /**
+     * @param Subject $subject
+     * @param \App\Models\Asset $asset
+     */
+    public function sendEuklesEvent(Subject $subject, \App\Models\Asset $asset)
+    {
+        // no email set? dont send an event.
+        if (!$subject->email) {
+            return;
+        }
+
+        $euklesProperties = [
+            'subject' => $subject,
+            'asset' => $asset
+        ];
+
+        $euklesEvent = \Eukles::createEvent('photo.upload', $euklesProperties);
+
+        // Track on ze eukles.
+        \Eukles::trackEvent($euklesEvent);
     }
 
     /**
@@ -130,7 +154,7 @@ class UploadController extends Base\ResourceController
             $tmpName = tempnam(storage_path(), 'image') . '.jpg';
             $this->base64_to_jpeg($base64, $tmpName);
 
-            $name = $content->get('name') ?? '1';
+            $name = date('YmdHis') . '.jpg';
             $file = new UploadedFile($tmpName, $name);
 
             return $file;

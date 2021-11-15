@@ -72,6 +72,7 @@ $routes->group(
                 \App\Http\Api\V1\Controllers\EventController::setRoutes($routes);
                 \App\Http\Api\V1\Controllers\OrganisationController::setRoutes($routes);
                 \App\Http\Api\V1\Controllers\UploadController::setRoutes($routes);
+                \App\Http\Api\V1\Controllers\SubjectController::setRoutes($routes);
 
 
             }

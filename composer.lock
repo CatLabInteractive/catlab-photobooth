@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fcf8c02ea6b0e05a0b709dcf7f7cc56",
+    "content-hash": "7a87dd7b6c652176d10d29bc6e6263f3",
     "packages": [
         {
             "name": "airbrake/phpbrake",
@@ -648,6 +648,54 @@
                 "source": "https://github.com/CatLabInteractive/cursor-pagination/tree/master"
             },
             "time": "2020-03-02T15:57:53+00:00"
+        },
+        {
+            "name": "catlabinteractive/eukles-client",
+            "version": "v1.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CatLabInteractive/eukles-client-php.git",
+                "reference": "cbb0907810755a33f6f759f82019d110a50f4aaa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CatLabInteractive/eukles-client-php/zipball/cbb0907810755a33f6f759f82019d110a50f4aaa",
+                "reference": "cbb0907810755a33f6f759f82019d110a50f4aaa",
+                "shasum": ""
+            },
+            "require": {
+                "catlabinteractive/base": "^1.0",
+                "guzzlehttp/guzzle": ">=6.0",
+                "php": "^7.0",
+                "symfony/psr-http-message-bridge": "^1.0",
+                "zendframework/zend-diactoros": "^1.4"
+            },
+            "require-dev": {
+                "laravel/framework": "5.4.*",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CatLab\\Eukles\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thijs Van der Schaeghe",
+                    "email": "thijs@catlab.be"
+                }
+            ],
+            "description": "Client for CatLab Eukles.",
+            "support": {
+                "issues": "https://github.com/CatLabInteractive/eukles-client-php/issues",
+                "source": "https://github.com/CatLabInteractive/eukles-client-php/tree/v1.0.12"
+            },
+            "time": "2020-11-24T21:56:58+00:00"
         },
         {
             "name": "catlabinteractive/laravel-catlab-accounts",
@@ -4328,61 +4376,6 @@
             "time": "2021-11-05T16:50:12+00:00"
         },
         {
-            "name": "psr/http-factory",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
-                "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0.0",
-                "psr/http-message": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Http\\Message\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interfaces for PSR-7 HTTP message factories",
-            "keywords": [
-                "factory",
-                "http",
-                "message",
-                "psr",
-                "psr-17",
-                "psr-7",
-                "request",
-                "response"
-            ],
-            "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/master"
-            },
-            "time": "2019-04-30T12:38:16+00:00"
-        },
-        {
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -7777,41 +7770,35 @@
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "2.2.1",
+            "version": "1.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "de5847b068362a88684a55b0dbb40d85986cfa52"
+                "reference": "a85e67b86e9b8520d07e6415fcbcb8391b44a75b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/de5847b068362a88684a55b0dbb40d85986cfa52",
-                "reference": "de5847b068362a88684a55b0dbb40d85986cfa52",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/a85e67b86e9b8520d07e6415fcbcb8391b44a75b",
+                "reference": "a85e67b86e9b8520d07e6415fcbcb8391b44a75b",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1",
-                "psr/http-factory": "^1.0",
+                "php": "^5.6 || ^7.0",
                 "psr/http-message": "^1.0"
             },
             "provide": {
-                "psr/http-factory-implementation": "1.0",
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "ext-curl": "*",
                 "ext-dom": "*",
                 "ext-libxml": "*",
-                "http-interop/http-factory-tests": "^0.5.0",
                 "php-http/psr7-integration-tests": "dev-master",
-                "phpunit/phpunit": "^7.0.2",
-                "zendframework/zend-coding-standard": "~1.0.0"
+                "phpunit/phpunit": "^5.7.16 || ^6.0.8 || ^7.2.7",
+                "zendframework/zend-coding-standard": "~1.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.x-dev",
-                    "dev-develop": "2.2.x-dev",
                     "dev-release-1.8": "1.8.x-dev"
                 }
             },
@@ -7832,24 +7819,21 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause"
+                "BSD-2-Clause"
             ],
             "description": "PSR HTTP Message implementations",
+            "homepage": "https://github.com/zendframework/zend-diactoros",
             "keywords": [
                 "http",
                 "psr",
                 "psr-7"
             ],
             "support": {
-                "docs": "https://docs.zendframework.com/zend-diactoros/",
-                "forum": "https://discourse.zendframework.com/c/questions/exprssive",
                 "issues": "https://github.com/zendframework/zend-diactoros/issues",
-                "rss": "https://github.com/zendframework/zend-diactoros/releases.atom",
-                "slack": "https://zendframework-slack.herokuapp.com",
                 "source": "https://github.com/zendframework/zend-diactoros"
             },
             "abandoned": "laminas/laminas-diactoros",
-            "time": "2019-11-13T19:16:13+00:00"
+            "time": "2019-08-06T17:53:53+00:00"
         }
     ],
     "packages-dev": [

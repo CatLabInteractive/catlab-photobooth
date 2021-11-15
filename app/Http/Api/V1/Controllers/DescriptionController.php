@@ -25,8 +25,8 @@ namespace App\Http\Api\V1\Controllers;
 use App\Http\Controllers\Controller;
 use CatLab\Charon\Collections\RouteCollection;
 use CatLab\Charon\Laravel\InputParsers\JsonBodyInputParser;
-use CatLab\Charon\Swagger\Authentication\OAuth2Authentication;
-use CatLab\Charon\Swagger\SwaggerBuilder;
+use CatLab\Charon\OpenApi\Authentication\OAuth2Authentication;
+use CatLab\Charon\OpenApi\V2\OpenApiV2Builder;
 use Laravel\Passport\Passport;
 
 /**
@@ -80,7 +80,7 @@ class DescriptionController extends Controller
      */
     protected function swaggerResponse()
     {
-        $builder = new SwaggerBuilder(\Request::getHttpHost(), '/');
+        $builder = new OpenApiV2Builder(\Request::getHttpHost(), '/');
 
         $builder
             ->setTitle(config('charon.title'))

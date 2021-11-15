@@ -22,13 +22,12 @@
 import {AbstractService} from './AbstractService';
 import $ from "jquery";
 
-export class OrganisationService extends AbstractService {
+export class SubjectService extends AbstractService {
 
     constructor() {
         super();
 
-        this.entityUrl = 'organisations';
-        this.indexUrl = 'users/me/organisations';
+        this.entityUrl = 'subjects';
     }
 
 }

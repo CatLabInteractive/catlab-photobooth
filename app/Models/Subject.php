@@ -3,15 +3,14 @@
 
 namespace App\Models;
 
+use CatLab\Eukles\Client\Interfaces\EuklesModel;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
-
 
 /**
  *
  */
-class Subject extends Model
+class Subject extends Model implements EuklesModel
 {
     /**
      * @param $identifier
@@ -56,5 +55,24 @@ class Subject extends Model
     public function assets()
     {
         return $this->hasMany(Asset::class);
+    }
+
+    public function getEuklesId()
+    {
+        return $this->id;
+    }
+
+    public function getEuklesAttributes()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email
+        ];
+    }
+
+    public function getEuklesType()
+    {
+        return 'subject';
     }
 }

@@ -53,6 +53,8 @@ import {Logger} from "./nfccards/tools/Logger";
 import Photobooth from "./views/Photobooth";
 import SyncExistingPhotos from "./views/SyncExistingPhotos";
 import {UploadService} from "./services/UploadService";
+import Subjects from "./views/Subjects";
+import {SubjectService} from "./services/SubjectService";
 
 Vue.component(
     'logout-link',
@@ -89,6 +91,12 @@ const router = new VueRouter({
         },
 
         {
+            path: '/subjects',
+            name: 'subjects',
+            component: Subjects,
+        },
+
+        {
             path: '/events/:id/photobooth',
             name: 'photobooth',
             component: Photobooth,
@@ -118,6 +126,7 @@ const router = new VueRouter({
 // Bootstrap card service
 Vue.prototype.$settingService = new SettingService();
 Vue.prototype.$organisationService = new OrganisationService();
+Vue.prototype.$subjectService = new SubjectService();
 
 Vue.prototype.$settingService.load()
     .then(

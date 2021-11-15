@@ -184,6 +184,8 @@ return [
         Kouz\LaravelAirbrake\ServiceProvider::class,
         CentralStorageServiceProvider::class,
 
+        \CatLab\Eukles\Client\EuklesServiceProvider::class,
+
 
     ],
 
@@ -235,6 +237,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'CentralStorage' => CatLab\CentralStorage\Client\CentralStorageClientFacade::class,
+        'Eukles' => CatLab\Eukles\Client\EuklesClientFacade::class,
 
     ],
 
