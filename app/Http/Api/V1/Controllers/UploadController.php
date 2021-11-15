@@ -151,10 +151,10 @@ class UploadController extends Base\ResourceController
 
             $base64 = $content->get('base64');
 
-            $tmpName = tempnam(storage_path(), 'image') . '.jpg';
+            $tmpName = tempnam(storage_path(), 'image') . '.png';
             $this->base64_to_jpeg($base64, $tmpName);
 
-            $name = date('YmdHis') . '.jpg';
+            $name = date('YmdHis') . '.png';
             $file = new UploadedFile($tmpName, $name);
 
             return $file;
