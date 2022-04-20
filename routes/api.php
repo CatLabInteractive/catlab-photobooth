@@ -20,5 +20,10 @@ $routeTransformer = new \CatLab\Charon\Laravel\Transformers\RouteTransformer();
 $routeCollection = include __DIR__ . '/../app/Http/Api/V1/routes.php';
 $routeTransformer->transform($routeCollection);
 
-Route::get('/check-in/{event}', 'App\Http\Controllers\EventController@checkinInfo')->name('checkin');
-Route::post('/check-in/{event}', 'App\Http\Controllers\EventController@checkin');
+
+Route::group([
+    'middleware' => 'cors'
+], function() {
+    Route::get('/check-in/{event}', 'App\Http\Controllers\EventController@checkinInfo')->name('checkin');
+    Route::post('/check-in/{event}', 'App\Http\Controllers\EventController@checkin');
+});
