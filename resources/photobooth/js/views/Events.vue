@@ -36,13 +36,13 @@
                         <router-link :to="{ name: 'photobooth', params: { id: row.item.id } }">{{ row.item.name }}</router-link>
                     </template>
 
-                    <template v-slot:cell(order_token)="row">
+                    <template v-slot:cell(checkin_url)="row">
                         <!--
                         <a :href="row.item.order_url" target="_blank" title="Client panel">
                             <pre>{{ row.item.order_token }}></pre>
                         </a>
                         -->
-                        <pre>{{ row.item.order_token }}</pre>
+                        <a :href="row.item.checkin_url">Check-In URL</a>
                     </template>
 
                     <template v-slot:cell(actions)="row">
@@ -114,6 +114,10 @@
                     {
                         key: 'name',
                         label: 'Event',
+                    },
+                    {
+                        key: 'checkin_url',
+                        label: 'Check-In URL'
                     },
                     {
                         key: 'actions',

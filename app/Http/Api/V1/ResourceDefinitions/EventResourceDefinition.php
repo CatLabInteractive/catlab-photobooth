@@ -52,37 +52,9 @@ class EventResourceDefinition extends ResourceDefinition
             ->writeable(true, true)
         ;
 
-        $this->field('is_selling')
-            ->bool()
-            ->visible(true)
-            ->writeable(true, true);
-
-        $this->field('order_token')
-            ->string()
-            ->visible(true)
-            ->writeable(true, true);
-
-        $this->field('orderUrl')
-            ->display('order_url')
-            ->string()
-            ->visible(true);
-
-        /**
-         *             $table->boolean('payment_cash')->default(0);
-        $table->boolean('payment_vouchers')->default(0);
-        $table->double('payment_voucher_value', 7, 2)->nullable()->default(null);
-        $table->boolean('payment_cards')->default(0);
-         */
-
-        $this->field([ 'payment_cash', 'payment_vouchers', 'payment_cards' ])
-            ->bool()
-            ->visible()
-            ->writeable();
-
-        $this->field('payment_voucher_value')
-            ->number()
-            ->visible()
-            ->writeable();
+        $this->field('checkinUrl')
+            ->display('checkin_url')
+            ->visible(true, true);
 
         $this->relationship('organisation', OrganisationResourceDefinition::class)
             ->one()

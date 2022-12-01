@@ -46,4 +46,12 @@ class Event extends Model
     {
         return $this->belongsTo(Organisation::class);
     }
+
+    /**
+     *
+     */
+    public function getCheckinUrl()
+    {
+        return \URL::signedRoute('checkin', [ $this->id ]);
+    }
 }
